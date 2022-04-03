@@ -44,8 +44,9 @@ function setTime() {
       // Stops execution of action at set interval
       clearInterval(timerInterval);
       // Calls function to create and append image
-      highscore();
+      // highscore();
       // append secondsLeft to local storage
+     
      
       
 
@@ -141,6 +142,12 @@ question1.textContent = question1String
 question2.textContent = question2String
 question3.textContent = question3String
 question4.textContent = question4String
+// final score
+// var fScore = re();
+// finalScores.push(fScore);
+scores.push(secondsLeft);
+console.log(secondsLeft);
+
 
 return;
   } else {
@@ -259,6 +266,9 @@ var todoCountSpan = document.querySelector("#todo-count");
 
 var todos = [];
 
+var scores = [];
+
+
 // TODO: What is the purpose of this function?
 // puts the todos on the page
 function renderTodos() {
@@ -273,13 +283,16 @@ function renderTodos() {
   // TODO: Describe the functionality of the following `for` loop.
   // appends what is typed to the todo list 
 
-  let finalScore = re();
+
  
   for (var i = 0; i < todos.length; i++) {
     var todo = todos[i];
+    var score =scores[i];
+ 
+
 
     var li = document.createElement("li");
-    li.textContent = `${todo} score was ${finalScore}` ;
+    li.textContent = `${todo} score was ${score}` ;
     console.log(secondsLeft);
     li.setAttribute("data-index", i);
 
@@ -297,10 +310,12 @@ function init() {
   // TODO: What is the purpose of the following line of code?
     // makes it a JSOn string
   var storedTodos = JSON.parse(localStorage.getItem("todos"));
+  var storedScores = JSON.parse(localStorage.getItem("score"));
   // TODO: Describe the functionality of the following `if` statement.
     // retive the todo from the localst making sure its not null
-  if (storedTodos !== null) {
+  if ((storedTodos !== null) && (storedScores !== null)) {
     todos = storedTodos;
+    scores = storedScores;
   }
   // TODO: Describe the purpose of the following line of code.
   // rendering the todo items and count on the screen
@@ -311,6 +326,7 @@ function storeTodos() {
   // TODO: Describe the purpose of the following line of code.
     // translating the todo items to json
   localStorage.setItem("todos", JSON.stringify(todos));
+  localStorage.setItem("score", JSON.stringify(scores));
 }
 // TODO: Describe the purpose of the following line of code.
 // when you clikc on submit the form is subimeted
@@ -318,14 +334,18 @@ function storeTodos() {
 todoForm.addEventListener("submit", function(event) {
   event.preventDefault();
   var todoText = todoInput.value.trim();
+  var finalScore = secondsLeft
   // TODO: Describe the functionality of the following `if` statement.
   // 
-  if (todoText === "") {
+  if (todoText === "" && finalScore === "") {
     return;
   }
  // TODO: Describe the purpose of the following lines of code.
   todos.push(todoText);
+  scores.push(finalScore)
+  
   todoInput.value = "";
+  finalScore.value = "";
  
   // TODO: What will happen when the following functions are called?
   storeTodos();
