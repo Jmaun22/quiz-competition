@@ -8,16 +8,30 @@
     <title>Document</title>
 </head>
 <body>
-
+    <button id="start">start</button>
+<div class="quiz">
     <h4 id="timer"></h4>
 
     <h4 id="Question"></h4>
 
 
-    <button id="question1">Question1</button>
-    <button id="question2">Question2</button>
-    <button id="question3">Question3</button>
-    <button id="question4">Question4</button>
+    <button id="question1"></button>
+    <button id="question2"></button>
+    <button id="question3"></button>
+    <button id="question4"></button>
+
+ </div>
+
+ <div class="card">
+    <h1 class="message">Todo Tracker</h1>
+    <form id="todo-form" method="POST">
+      <label for="todo-text">Add a Todo: </label>
+      <input type="text" placeholder="I need to..." name="todo-text" id="todo-text" />
+    </form>
+    <p>Todo Count: <span id="todo-count">0</span></p>
+    <ul id="todo-list"></ul>
+
+</div>
 
 
 
