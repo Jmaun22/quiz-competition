@@ -57,6 +57,8 @@ var question4 = document.querySelector("#question4");
 
 
 
+
+
 // creating a question object 
 
 var question = {
@@ -71,18 +73,53 @@ var question = {
 
 // creating var strings for the questions 
 
-var questionAskedString = `${question.questionAsked[0]}`
+  // var to keep track of what questin you are on
+
+  var questionCounter = 0;
 
 
-var question1String = `${question.choice1[0]}`
+
+var questionAskedString = `${question.questionAsked[questionCounter]}`
 
 
-var question2String = `${question.choice2[0]}`
+var question1String = `${question.choice1[questionCounter]}`
 
-var question3String = `${question.choice3[0]}`
 
-var question4String = `${question.choice4[0]}`
+var question2String = `${question.choice2[questionCounter]}`
 
+var question3String = `${question.choice3[questionCounter]}`
+
+var question4String = `${question.choice4[questionCounter]}`
+
+var answerString = `${question.answer[questionCounter]}`
+
+/* ----------------------------- reload function ---------------------------- */
+
+function reload(questionCounter) {
+
+  var questionAskedString = `${question.questionAsked[questionCounter]}`
+
+
+var question1String = `${question.choice1[questionCounter]}`
+
+
+var question2String = `${question.choice2[questionCounter]}`
+
+var question3String = `${question.choice3[questionCounter]}`
+
+var question4String = `${question.choice4[questionCounter]}`
+
+var answerString = `${question.answer[questionCounter]}`
+
+questionAsked.textContent = questionAskedString
+question1.textContent = question1String
+question2.textContent = question2String
+question3.textContent = question3String
+question4.textContent = question4String
+
+return
+  
+};
 
 
 // adding the questions to the question buttons
@@ -92,26 +129,83 @@ question2.textContent = question2String
 question3.textContent = question3String
 question4.textContent = question4String
 
+  
+
+// which choice is choosen 
+
+var choicePicked = '';
+
+question1.addEventListener("click",(event) =>{
+  choicePicked = 'choice1';
+  checkanswer();
+  reload(questionCounter);
+  
+  
+
+  // setCounterText()
+}
+  );
+question2.addEventListener("click",(event) =>{
+    choicePicked = 'choice2';
+    checkanswer();
+    reload(questionCounter);
+    
+    
+    // setCounterText()
+  }
+    );
+ question3.addEventListener("click",(event) =>{
+      choicePicked = 'choice3';
+      checkanswer();
+      reload(questionCounter);
+
+      
+      
+      // setCounterText()
+    }
+      );
+      question4.addEventListener("click",(event) =>{
+        choicePicked = 'choice4';
+        checkanswer();
+        reload(questionCounter);
+        
+       
+        // setCounterText()
+      }
+        );
+
+      
+
 
 // checking to see if the answer is correct or wrong
 
 function checkanswer() {
-  
 
+  if(choicePicked == answerString) {
+    questionCounter++
+    secondsLeft = secondsLeft + 10;
+
+
+    console.log("Got it right ")
+    console.log(questionCounter)
+
+
+
+} else{
+  questionCounter++
+  secondsLeft = secondsLeft - 5;
+  console.log("Got it wrong")
+  console.log(questionCounter)
+
+};
+return questionCounter;
 };
 
 
 
 
-// TODO: Add event listener to increment button
-question1.addEventListener("click",(event) =>{
-  count++
-  setCounterText()
-}
-  ) 
 
-// TODO: Add event listener to decrement button 
-question2.addEventListener("click", sub);
-question3.addEventListener("click", sub);
-question4.addEventListener("click", sub);
+
+
+
 
