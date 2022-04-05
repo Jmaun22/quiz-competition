@@ -1,6 +1,8 @@
 
 /* ------------------------------- global vars ------------------------------ */
 var secondsLeft = 0;
+var finalScore = re();
+
 // hide question buttons
 document. getElementById("question1"). hidden=true;
 document. getElementById("question2"). hidden=true;
@@ -38,22 +40,25 @@ function setTime() {
   // Sets interval in variable
   var timerInterval = setInterval(function() {
     secondsLeft--;
-    timeEl.textContent = secondsLeft + " seconds left till colorsplosion.";
+    timeEl.textContent = secondsLeft ;
 
-    if(secondsLeft === 0) {
+    if(secondsLeft === 0  || questionCounter >= 8) {
       // Stops execution of action at set interval
+      var timeLeft = secondsLeft;
+      localStorage.setItem("timeLeft", timeLeft.toString());
       clearInterval(timerInterval);
       // Calls function to create and append image
-      // highscore();
+  
       // append secondsLeft to local storage
+     
      
      
       
 
     } else {
       
-      var timeLeft = secondsLeft;
-      localStorage.setItem("timeLeft", timeLeft.toString());
+      // var timeLeft = secondsLeft;
+      // localStorage.setItem("timeLeft", timeLeft.toString());
       console.log(timeLeft);
     };
     
@@ -86,12 +91,12 @@ var question4 = document.querySelector("#question4");
 // creating a question object 
 
 var question = {
-  questionAsked: ['What is a Boolean?','What does it mean if a value is null?', 'Which is used for creating unqiue identifers for objects?'],
-  choice1: ['represents a true or false values', 'there is a value there', 'Numbers'],
-  choice2: ['an interger', 'the value is a number value', 'String'],
-  choice3: ['a conditonal staement','the value is a letter values', 'Symbol'],
-  choice4: ['a coding language', 'the value represents nothing and an unknown type', 'objects'],
-  answer: ['choice1', 'choice4', 'choice3' ]
+  questionAsked: ['What is a Boolean?','What does it mean if a value is null?', 'Which is used for creating unqiue identifers for objects?','Hoisting is?', 'What is Big O Notation?', 'Which of these is not a J.S. data type?', 'What are possible ways to display J.S. outputs?', 'A phrase of J.S. that can be evaluted to produce a value', 'A data value that appears directly in a program' ],
+  choice1: ['represents a true or false values', 'there is a value there', 'Numbers', 'All variable and function declarations are moved on top', 'a bootsrap thing', 'String', 'innerHTML', 'statement', 'literal'],
+  choice2: ['an interger', 'the value is a number value', 'String', 'All varibales are moved to the bottom.', 'a html thing', 'Booleans', 'innerText', 'expression', 'identifer'],
+  choice3: ['a conditonal staement','the value is a letter values', 'Symbol', 'declartions are moved to the right', 'a logarithic efficiency thing', 'Null', 'print', 'method', 'primative types'],
+  choice4: ['a coding language', 'the value represents nothing and an unknown type', 'objects', 'declarations are moved to the left', 'an array thing', 'console.log()', 'Identifer', 'function'],
+  answer: ['choice1', 'choice4', 'choice3', 'choice1', 'choice3', 'choice4', 'choice3', 'choice2', 'choice1' ]
 
 }
 
@@ -121,7 +126,7 @@ var answerString = `${question.answer[questionCounter]}`
 
 function reload(questionCounter) {
 
-  if(questionCounter <= 2) {
+  if(questionCounter <= 8) {
 
   var questionAskedString = `${question.questionAsked[questionCounter]}`
 
@@ -145,8 +150,7 @@ question4.textContent = question4String
 // final score
 // var fScore = re();
 // finalScores.push(fScore);
-scores.push(secondsLeft);
-console.log(secondsLeft);
+
 
 
 return;
@@ -157,7 +161,12 @@ return;
 document. getElementById("question2"). hidden=true;
 document. getElementById("question3"). hidden=true;
 document. getElementById("question4"). hidden=true;
-re();
+var finalScore = Number(localStorage.getItem("timeLeft"));
+scores.push(finalScore);
+console.log(finalScore);
+
+// re();
+
 
 
 
@@ -287,7 +296,7 @@ function renderTodos() {
  
   for (var i = 0; i < todos.length; i++) {
     var todo = todos[i];
-    var score =scores[i];
+    var score = scores[i];
  
 
 
@@ -296,10 +305,10 @@ function renderTodos() {
     console.log(secondsLeft);
     li.setAttribute("data-index", i);
 
-    var button = document.createElement("button");
-    button.textContent = "Complete ✔️";
+    // var button = document.createElement("button");
+    // button.textContent = "Complete ✔️";
 
-    li.appendChild(button);
+    // li.appendChild(button);
     todoList.appendChild(li);
   }
 }
@@ -342,7 +351,7 @@ todoForm.addEventListener("submit", function(event) {
   }
  // TODO: Describe the purpose of the following lines of code.
   todos.push(todoText);
-  scores.push(finalScore)
+  // scores.push(finalScore)
   
   todoInput.value = "";
   finalScore.value = "";
@@ -379,8 +388,7 @@ var finalScore = Number(localStorage.getItem("timeLeft"));
 console.log(`lastsub ${finalScore}`)
 
   if (finalScore !== null) {
-    document.querySelector(".message").textContent = finalScore + 
-    " password is " + finalScore
+    document.querySelector(".message").textContent = "The last socre was " + finalScore 
   };
   return finalScore
 };
