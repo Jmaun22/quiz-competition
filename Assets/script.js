@@ -50,6 +50,7 @@ function setTime() {
       // Calls function to create and append image
   
       // append secondsLeft to local storage
+    
      
      
      
@@ -64,11 +65,14 @@ function setTime() {
     
 
   }, 1000);
+  
 }
 
 
 
+
 setTime();
+
 
 /* ---------------------------------- Timer --------------------------------- */
 /* -------------------------------- questions ------------------------------- */
@@ -124,7 +128,8 @@ var answerString = `${question.answer[questionCounter]}`
 
 /* ----------------------------- reload function ---------------------------- */
 
-function reload(questionCounter) {
+
+function reload(questionCounter, timeLeft) {
 
   if(questionCounter <= 8) {
 
@@ -163,7 +168,7 @@ document. getElementById("question3"). hidden=true;
 document. getElementById("question4"). hidden=true;
 var finalScore = Number(localStorage.getItem("timeLeft"));
 scores.push(finalScore);
-console.log(finalScore);
+
 
 // re();
 
@@ -343,7 +348,7 @@ function storeTodos() {
 todoForm.addEventListener("submit", function(event) {
   event.preventDefault();
   var todoText = todoInput.value.trim();
-  var finalScore = secondsLeft
+  // var finalScore = secondsLeft
   // TODO: Describe the functionality of the following `if` statement.
   // 
   if (todoText === "" && finalScore === "") {
